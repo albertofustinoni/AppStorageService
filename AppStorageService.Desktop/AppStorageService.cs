@@ -66,7 +66,10 @@ namespace AppStorageService.Desktop
             {
                 using (var store = GetStore())
                 {
-                    store.DeleteFile(FileName);
+                    if(store.FileExists(FileName))
+                    {
+                        store.DeleteFile(FileName);
+                    }
                 }
             });
 

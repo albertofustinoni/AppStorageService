@@ -49,7 +49,7 @@ namespace AppStorageService.Core.Test
         }
 
         [Fact]
-        public async Task DeleteDataAsync_Works_When_No_Data_IS_Present()
+        public async Task DeleteDataAsync_Works_When_No_Data_Is_Present()
         {
             var service = GetServiceInstance<TestModel>(StorageFileName);
             await service.DeleteDataAsync();
