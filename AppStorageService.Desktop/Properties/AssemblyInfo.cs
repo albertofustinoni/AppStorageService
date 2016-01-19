@@ -5,9 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AppStorageService.Desktop")]
+[assembly: AssemblyTitle("AppStorageService Desktop")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("AppStorageService.Desktop")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
