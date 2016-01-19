@@ -2,7 +2,7 @@
 
 namespace AppStorageService.Core
 {
-    internal abstract class AppStorageServiceBase<TData> : IAppStorageService<TData> where TData : class
+    public abstract class AppStorageServiceBase<TData> : IAppStorageService<TData> where TData : class
     {
         public readonly string FileName;
         public bool OperationInProgress { get; private set; }
