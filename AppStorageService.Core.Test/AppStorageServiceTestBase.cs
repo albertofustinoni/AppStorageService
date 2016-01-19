@@ -8,40 +8,37 @@ namespace AppStorageService.Core.Test
 {
     public abstract class AppStorageServiceTestBase<TService> where TService: IAppStorageService<TestModel>
     {
-        const string StorageFileName = "FileName.dat";
-        public static readonly TestModel SampleData = TestModel.Generate();
+        private const string StorageFileName = "FileName.dat";
+        private static readonly TestModel SampleData = TestModel.Generate();
 
         protected abstract IAppStorageService<T> GetServiceInstance<T>(string storageFileName) where T : class;
-        protected abstract Task DeleteStorageFile();
-
-        private IAppStorageService<TestModel> Service { get; set; }
-
-        private void Init()
-        {
-            Service = GetServiceInstance<TestModel>(StorageFileName);
-        }
+        protected abstract Task DeleteStorageFile(string storageFileName);
 
         [Fact]
         public async Task LoadFromStorageAsync_Returns_Null_If_No_Data_Is_Present()
         {
+            var service = GetServiceInstance<TestModel>(StorageFileName);
+
             try
             {
-                await DeleteStorageFile();
+                await DeleteStorageFile(StorageFileName);
             }
             catch (FileNotFoundException)
             {
             }
 
-            var data = await Service.LoadDataAsync();
+            var data = await service.LoadDataAsync();
             Assert.Null(data);
         }
 
         [Fact]
         public async Task LoadFromStorageAsync_Returns_Data_As_Saved()
         {
-            await Service.SaveDataAsync(SampleData);
+            var service = GetServiceInstance<TestModel>(StorageFileName);
 
-            var data = await Service.LoadDataAsync();
+            await service.SaveDataAsync(SampleData);
+
+            var data = await service.LoadDataAsync();
             Assert.Equal(SampleData, data);
         }
 
