@@ -45,7 +45,7 @@ namespace AppStorageService.Core.Test
 
             await service.DeleteDataAsync();
             data = await service.LoadDataAsync();
-            Assert.NotNull(data);
+            Assert.Null(data);
         }
 
         [Fact]
