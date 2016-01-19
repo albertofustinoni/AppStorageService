@@ -17,6 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStorageService.Desktop.T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F96A5C4D-C3B1-4F94-B748-7E26743C91ED}"
 	ProjectSection(SolutionItems) = preProject
+		License.txt = License.txt
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
