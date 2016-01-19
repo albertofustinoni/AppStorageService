@@ -10,9 +10,8 @@ namespace AppStorageService.Desktop
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
-        public override async Task<TData> LoadDataAsync()
+        public override async Task<TData> LoadDataAsyncLogic()
         {
-            OperationInProgress = true;
             var task = Task.Run<TData>(() =>
             {
                 TData output;
@@ -35,14 +34,12 @@ namespace AppStorageService.Desktop
             });
 
             var result = await task;
-            OperationInProgress = false;
 
             return result;
         }
 
-        public override async Task SaveDataAsync(TData data)
+        public override async Task SaveDataAsyncLogic(TData data)
         {
-            OperationInProgress = true;
             var task = Task.Run(() =>
             {
                 using (var store = GetStore())
@@ -56,12 +53,10 @@ namespace AppStorageService.Desktop
             });
 
             await task;
-            OperationInProgress = false;
         }
 
-        public override async Task DeleteDataAsync()
+        public override async Task DeleteDataAsyncLogic()
         {
-            OperationInProgress = true;
             var task = Task.Run(() =>
             {
                 using (var store = GetStore())
@@ -74,7 +69,6 @@ namespace AppStorageService.Desktop
             });
 
             await task;
-            OperationInProgress = false;
         }
 
         private static IsolatedStorageFile GetStore()
