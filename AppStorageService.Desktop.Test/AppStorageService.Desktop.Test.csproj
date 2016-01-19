@@ -54,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppStorageService.Core.Test\AppStorageService.Core.Test.csproj">
+      <Project>{6e18a30f-3707-4204-8f45-8633737df0c1}</Project>
+      <Name>AppStorageService.Core.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AppStorageService.Core\AppStorageService.Core.csproj">
       <Project>{b8391564-60b0-47e6-a1dc-df7759ca1cd7}</Project>
       <Name>AppStorageService.Core</Name>
