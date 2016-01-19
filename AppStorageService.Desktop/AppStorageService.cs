@@ -59,6 +59,21 @@ namespace AppStorageService.Desktop
             OperationInProgress = false;
         }
 
+        public override async Task DeleteDataAsync()
+        {
+            OperationInProgress = true;
+            var task = Task.Run(() =>
+            {
+                using (var store = GetStore())
+                {
+                    store.DeleteFile(FileName);
+                }
+            });
+
+            await task;
+            OperationInProgress = false;
+        }
+
         private static IsolatedStorageFile GetStore()
         {
             return IsolatedStorageFile.GetUserStoreForAssembly();

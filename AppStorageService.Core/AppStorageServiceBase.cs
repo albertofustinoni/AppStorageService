@@ -14,7 +14,7 @@ namespace AppStorageService.Core
         }
 
         public abstract Task SaveDataAsync(TData data);
-
         public abstract Task<TData> LoadDataAsync();
+        public abstract Task DeleteDataAsync();
     }
 }

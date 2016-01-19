@@ -7,5 +7,6 @@ namespace AppStorageService.Core
         bool OperationInProgress { get; }
         Task SaveDataAsync(TData data);
         Task<TData> LoadDataAsync();
+        Task DeleteDataAsync();
     }
 }

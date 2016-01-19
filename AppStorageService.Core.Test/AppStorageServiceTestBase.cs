@@ -12,20 +12,12 @@ namespace AppStorageService.Core.Test
         private static readonly TestModel SampleData = TestModel.Generate();
 
         protected abstract IAppStorageService<T> GetServiceInstance<T>(string storageFileName) where T : class;
-        protected abstract Task DeleteStorageFile(string storageFileName);
 
         [Fact]
         public async Task LoadFromStorageAsync_Returns_Null_If_No_Data_Is_Present()
         {
             var service = GetServiceInstance<TestModel>(StorageFileName);
-
-            try
-            {
-                await DeleteStorageFile(StorageFileName);
-            }
-            catch (FileNotFoundException)
-            {
-            }
+            await service.DeleteDataAsync();
 
             var data = await service.LoadDataAsync();
             Assert.Null(data);
@@ -40,6 +32,28 @@ namespace AppStorageService.Core.Test
 
             var data = await service.LoadDataAsync();
             Assert.Equal(SampleData, data);
+        }
+
+        [Fact]
+        public async Task DeleteDataAsync_Deletes_Data()
+        {
+            var service = GetServiceInstance<TestModel>(StorageFileName);
+
+            await service.SaveDataAsync(SampleData);
+            var data = await service.LoadDataAsync();
+            Assert.NotNull(data);
+
+            await service.DeleteDataAsync();
+            data = await service.LoadDataAsync();
+            Assert.NotNull(data);
+        }
+
+        [Fact]
+        public async Task DeleteDataAsync_Works_When_No_Data_IS_Present()
+        {
+            var service = GetServiceInstance<TestModel>(StorageFileName);
+            await service.DeleteDataAsync();
+            await service.DeleteDataAsync();
         }
 
         [Fact]

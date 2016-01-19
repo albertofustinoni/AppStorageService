@@ -1,7 +1,7 @@
 ﻿using AppStorageService.Core;
 using AppStorageService.Core.Test;
 
-namespace AppStorageService.Universal.Test
+namespace AppStorageService.Desktop.Test
 {
     public class AppStorageServiceTest : AppStorageServiceTestBase<AppStorageService<TestModel>>
     {

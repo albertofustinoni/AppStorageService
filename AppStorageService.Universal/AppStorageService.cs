@@ -13,6 +13,25 @@ namespace AppStorageService.Universal
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
+        public override async Task SaveDataAsync(TData data)
+        {
+            var folder = GetStorageFolder();
+            var file = await folder.CreateFileAsync(FileName, CreationCollisionOption.ReplaceExisting);
+            using (var unprotectedStream = new InMemoryRandomAccessStream())
+            {
+                var serializer = new DataContractJsonSerializer(data.GetType());
+                serializer.WriteObject(unprotectedStream.AsStreamForWrite(), data);
+                unprotectedStream.Seek(0);
+
+                using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    var protector = new DataProtectionProvider("LOCAL=user");
+                    await protector.ProtectStreamAsync(unprotectedStream, stream);
+                    await stream.FlushAsync();
+                }
+            }
+        }
+
         public override async Task<TData> LoadDataAsync()
         {
             var folder = GetStorageFolder();
@@ -44,23 +63,19 @@ namespace AppStorageService.Universal
             return output;
         }
 
-        public override async Task SaveDataAsync(TData data)
+        public override async Task DeleteDataAsync()
         {
             var folder = GetStorageFolder();
-            var file = await folder.CreateFileAsync(FileName, CreationCollisionOption.ReplaceExisting);
-            using (var unprotectedStream = new InMemoryRandomAccessStream())
+            StorageFile file;
+            try
             {
-                var serializer = new DataContractJsonSerializer(data.GetType());
-                serializer.WriteObject(unprotectedStream.AsStreamForWrite(), data);
-                unprotectedStream.Seek(0);
-
-                using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
-                {
-                    var protector = new DataProtectionProvider("LOCAL=user");
-                    await protector.ProtectStreamAsync(unprotectedStream, stream);
-                    await stream.FlushAsync();
-                }
+                file = await folder.GetFileAsync(FileName);
             }
+            catch (FileNotFoundException)
+            {
+                return;
+            }
+            await file.DeleteAsync();
         }
 
         private StorageFolder GetStorageFolder()
