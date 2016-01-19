@@ -6,18 +6,11 @@ using System.Threading.Tasks;
 
 namespace AppStorageService.Desktop
 {
-    public class AppStorageService<TData> : IAppStorageService<TData> where TData : class
+    public class AppStorageService<TData> : AppStorageServiceBase<TData> where TData : class
     {
-        public readonly string FileName;
-        public bool OperationInProgress { get; private set; }
+        public AppStorageService(string fileName) : base(fileName) { }
 
-        public AppStorageService(string fileName)
-        {
-            FileName = fileName;
-            OperationInProgress = false;
-        }
-
-        public async Task<TData> LoadDataAsync()
+        public override async Task<TData> LoadDataAsync()
         {
             OperationInProgress = true;
             var task = Task.Run<TData>(() =>
@@ -47,7 +40,7 @@ namespace AppStorageService.Desktop
             return result;
         }
 
-        public async Task SaveDataAsync(TData data)
+        public override async Task SaveDataAsync(TData data)
         {
             OperationInProgress = true;
             var task = Task.Run(() =>
