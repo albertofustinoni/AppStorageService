@@ -13,7 +13,7 @@ namespace AppStorageService.Universal
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
-        public override async Task SaveDataAsyncLogic(TData data)
+        protected override async Task SaveDataAsyncLogic(TData data)
         {
             var folder = GetStorageFolder();
             var file = await folder.CreateFileAsync(FileName, CreationCollisionOption.ReplaceExisting);
@@ -32,7 +32,7 @@ namespace AppStorageService.Universal
             }
         }
 
-        public override async Task<TData> LoadDataAsyncLogic()
+        protected override async Task<TData> LoadDataAsyncLogic()
         {
             var folder = GetStorageFolder();
             StorageFile file;
@@ -63,7 +63,7 @@ namespace AppStorageService.Universal
             return output;
         }
 
-        public override async Task DeleteDataAsyncLogic()
+        protected override async Task DeleteDataAsyncLogic()
         {
             var folder = GetStorageFolder();
             StorageFile file;

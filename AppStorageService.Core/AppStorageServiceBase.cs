@@ -5,9 +5,9 @@ namespace AppStorageService.Core
 {
     public abstract class AppStorageServiceBase<TData> : IAppStorageService<TData> where TData : class
     {
-        public abstract Task SaveDataAsyncLogic(TData data);
-        public abstract Task<TData> LoadDataAsyncLogic();
-        public abstract Task DeleteDataAsyncLogic();
+        protected abstract Task SaveDataAsyncLogic(TData data);
+        protected abstract Task<TData> LoadDataAsyncLogic();
+        protected abstract Task DeleteDataAsyncLogic();
 
         public readonly string FileName;
         public bool OperationInProgress { get; private set; }

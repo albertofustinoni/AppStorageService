@@ -10,7 +10,7 @@ namespace AppStorageService.Desktop
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
-        public override async Task<TData> LoadDataAsyncLogic()
+        protected override async Task<TData> LoadDataAsyncLogic()
         {
             var task = Task.Run<TData>(() =>
             {
@@ -38,7 +38,7 @@ namespace AppStorageService.Desktop
             return result;
         }
 
-        public override async Task SaveDataAsyncLogic(TData data)
+        protected override async Task SaveDataAsyncLogic(TData data)
         {
             var task = Task.Run(() =>
             {
@@ -55,7 +55,7 @@ namespace AppStorageService.Desktop
             await task;
         }
 
-        public override async Task DeleteDataAsyncLogic()
+        protected override async Task DeleteDataAsyncLogic()
         {
             var task = Task.Run(() =>
             {
