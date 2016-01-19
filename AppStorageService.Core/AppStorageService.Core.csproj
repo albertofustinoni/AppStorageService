@@ -41,6 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="AppStorageService.Core.nuspec" />
     <None Include="StrongNameKey.snk" />
   </ItemGroup>
   <ItemGroup>

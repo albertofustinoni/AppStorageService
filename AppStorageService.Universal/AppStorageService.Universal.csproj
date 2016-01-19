@@ -107,6 +107,7 @@
     <None Include="..\AppStorageService.Core\StrongNameKey.snk">
       <Link>StrongNameKey.snk</Link>
     </None>
+    <None Include="AppStorageService.Universal.nuspec" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
