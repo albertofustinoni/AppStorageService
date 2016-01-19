@@ -9,7 +9,7 @@ using Windows.Storage.Streams;
 
 namespace AppStorageService.Universal
 {
-    class AppStorageService<TData> : AppStorageServiceBase<TData> where TData : class
+    public class AppStorageService<TData> : AppStorageServiceBase<TData> where TData : class
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
