@@ -15,6 +15,8 @@ namespace AppStorageService.Universal
 
         public override async Task SaveDataAsync(TData data)
         {
+            OperationInProgress = true;
+
             var folder = GetStorageFolder();
             var file = await folder.CreateFileAsync(FileName, CreationCollisionOption.ReplaceExisting);
             using (var unprotectedStream = new InMemoryRandomAccessStream())
@@ -30,10 +32,14 @@ namespace AppStorageService.Universal
                     await stream.FlushAsync();
                 }
             }
+
+            OperationInProgress = false;
         }
 
         public override async Task<TData> LoadDataAsync()
         {
+            OperationInProgress = true;
+
             var folder = GetStorageFolder();
             StorageFile file;
             try
@@ -60,11 +66,14 @@ namespace AppStorageService.Universal
                 output = (TData)serializer.ReadObject(unprotectedStream.AsStreamForRead());
             }
 
+            OperationInProgress = false;
             return output;
         }
 
         public override async Task DeleteDataAsync()
         {
+            OperationInProgress = true;
+
             var folder = GetStorageFolder();
             StorageFile file;
             try
@@ -76,6 +85,8 @@ namespace AppStorageService.Universal
                 return;
             }
             await file.DeleteAsync();
+
+            OperationInProgress = false;
         }
 
         private StorageFolder GetStorageFolder()

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,27 @@ namespace AppStorageService.Core.Test
             await testService.SaveDataAsync(testData);
             var data = await testService.LoadDataAsync();
             Assert.Equal(testData, data);
+        }
+
+        [Fact]
+        public async Task OperationInProgress_Works()
+        {
+            var operationsToTest = new Func<IAppStorageService<TestModel>, Task>[]
+            {
+                d => d.SaveDataAsync(SampleData),
+                d => d.LoadDataAsync(),
+                d => d.DeleteDataAsync()
+            };
+
+            foreach(var i in operationsToTest)
+            {
+                var testService = GetServiceInstance<TestModel>(StorageFileName);
+                Assert.False(testService.OperationInProgress);
+                var task = i(testService);
+                Assert.True(testService.OperationInProgress);
+                await task;
+                Assert.False(testService.OperationInProgress);
+            }
         }
 
         private static string ToJSON<T>(T obj) where T : class
