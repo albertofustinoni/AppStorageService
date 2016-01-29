@@ -4,6 +4,7 @@ using Xunit;
 
 namespace AppStorageService.Core.Test
 {
+    [Collection("Collection1")]
     public abstract class AppStorageServiceTestBase<TService> where TService: IAppStorageService<TestModel>
     {
         private const string StorageFileNamePattern = "FileName{0}.dat";
