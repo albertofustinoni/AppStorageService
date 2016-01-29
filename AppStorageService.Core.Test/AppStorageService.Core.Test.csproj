@@ -56,7 +56,6 @@
     <Compile Include="AppStorageServiceTestBase.cs" />
     <Compile Include="AppStorageServiceCachedBaseTest.cs" />
     <Compile Include="Mocks\AppStorageServiceMock.cs" />
-    <Compile Include="Models\TestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TestModel.cs" />
   </ItemGroup>
