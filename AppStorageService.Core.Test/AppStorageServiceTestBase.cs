@@ -6,10 +6,19 @@ namespace AppStorageService.Core.Test
 {
     public abstract class AppStorageServiceTestBase<TService> where TService: IAppStorageService<TestModel>
     {
-        private const string StorageFileName = "FileName.dat";
+        private const string StorageFileNamePattern = "FileName{0}.dat";
+        private static int NumInstances = 0;
+
+        private readonly string StorageFileName;
         private static readonly TestModel SampleData = TestModel.Generate();
 
         protected abstract TService GetServiceInstance(string storageFileName);
+
+        public AppStorageServiceTestBase()
+        {
+            NumInstances++;
+            StorageFileName = string.Format(StorageFileNamePattern, NumInstances);
+        }
 
         [Fact]
         public async Task LoadFromStorageAsync_Returns_Null_If_No_Data_Is_Present()
@@ -19,6 +28,8 @@ namespace AppStorageService.Core.Test
 
             var data = await service.LoadDataAsync();
             Assert.Null(data);
+
+            await CleanUp();
         }
 
         [Fact]
@@ -30,6 +41,8 @@ namespace AppStorageService.Core.Test
 
             var data = await service.LoadDataAsync();
             Assert.Equal(SampleData, data);
+
+            await CleanUp();
         }
 
         [Fact]
@@ -44,6 +57,8 @@ namespace AppStorageService.Core.Test
             await service.DeleteDataAsync();
             data = await service.LoadDataAsync();
             Assert.Null(data);
+
+            await CleanUp();
         }
 
         [Fact]
@@ -52,6 +67,8 @@ namespace AppStorageService.Core.Test
             var service = GetServiceInstance(StorageFileName);
             await service.DeleteDataAsync();
             await service.DeleteDataAsync();
+
+            await CleanUp();
         }
 
         [Fact]
@@ -87,6 +104,14 @@ namespace AppStorageService.Core.Test
                 await task;
                 Assert.False(testService.OperationInProgress);
             }
+
+            await CleanUp();
+        }
+
+        private Task CleanUp()
+        {
+            var service = GetServiceInstance(StorageFileName);
+            return service.DeleteDataAsync();
         }
     }
 }
