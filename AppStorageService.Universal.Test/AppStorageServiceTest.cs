@@ -1,13 +1,12 @@
-﻿using AppStorageService.Core;
-using AppStorageService.Core.Test;
+﻿using AppStorageService.Core.Test;
 
 namespace AppStorageService.Universal.Test
 {
     public class AppStorageServiceTest : AppStorageServiceTestBase<AppStorageService<TestModel>>
     {
-        protected override IAppStorageService<T> GetServiceInstance<T>(string storageFileName)
+        protected override AppStorageService<TestModel> GetServiceInstance(string storageFileName)
         {
-            return new AppStorageService<T>(storageFileName);
+            return new AppStorageService<TestModel>(storageFileName);
         }
     }
 }
