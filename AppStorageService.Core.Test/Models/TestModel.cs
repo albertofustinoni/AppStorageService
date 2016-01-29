@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace AppStorageService.Core.Test
+namespace AppStorageService.Core.Test.Models
 {
     [DataContract]
     public class TestModel

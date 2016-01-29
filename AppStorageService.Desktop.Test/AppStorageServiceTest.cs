@@ -1,4 +1,5 @@
 ﻿using AppStorageService.Core.Test;
+using AppStorageService.Core.Test.Models;
 
 namespace AppStorageService.Desktop.Test
 {
