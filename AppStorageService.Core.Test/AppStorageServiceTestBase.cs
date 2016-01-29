@@ -7,19 +7,11 @@ namespace AppStorageService.Core.Test
     [Collection("Collection1")]
     public abstract class AppStorageServiceTestBase<TService> where TService: IAppStorageService<TestModel>
     {
-        private const string StorageFileNamePattern = "FileName{0}.dat";
-        private static int NumInstances = 0;
+        private const string StorageFileName = "FileName.dat";
 
-        private readonly string StorageFileName;
         private static readonly TestModel SampleData = TestModel.Generate();
 
         protected abstract TService GetServiceInstance(string storageFileName);
-
-        public AppStorageServiceTestBase()
-        {
-            NumInstances++;
-            StorageFileName = string.Format(StorageFileNamePattern, NumInstances);
-        }
 
         [Fact]
         public async Task LoadFromStorageAsync_Returns_Null_If_No_Data_Is_Present()
