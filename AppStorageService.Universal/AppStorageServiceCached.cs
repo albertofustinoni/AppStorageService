@@ -1,6 +1,6 @@
 ﻿using AppStorageService.Core;
 
-namespace AppStorageService.Desktop
+namespace AppStorageService.Universal
 {
     public abstract class AppStorageServiceCached<TData> : AppStorageServiceCachedBase<AppStorageService<TData>, TData> where TData : class
     {
