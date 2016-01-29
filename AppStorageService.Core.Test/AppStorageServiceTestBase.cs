@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppStorageService.Core.Test.Models;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 

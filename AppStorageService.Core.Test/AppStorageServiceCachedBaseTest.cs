@@ -8,14 +8,14 @@ namespace AppStorageService.Core.Test
 {
     public class AppStorageServiceCachedBaseTest
     {
-        class TestService : AppStorageServiceCachedBase<AppStorageServiceMock, TestData>
+        class TestService : AppStorageServiceCachedBase<AppStorageServiceMock, TestModel>
         {
-            public event Func<TestData, TestData> CloneDataHandler;
+            public event Func<TestModel, TestModel> CloneDataHandler;
             public AppStorageServiceMock BackingStore { get; private set; }
 
             public TestService() : base(null) { }
 
-            protected override TestData CloneData(TestData input) { return CloneDataHandler(input); }
+            protected override TestModel CloneData(TestModel input) { return CloneDataHandler(input); }
 
             protected override AppStorageServiceMock CreateBackingServiceInstance(string fileName)
             {
@@ -27,7 +27,7 @@ namespace AppStorageService.Core.Test
         [Fact]
         public async Task SaveDataAsyncWorks()
         {
-            var data = new TestData();
+            var data = new TestModel();
             var service = new TestService();
 
             var saveDataCalled = false;
@@ -58,8 +58,8 @@ namespace AppStorageService.Core.Test
         {
             const int numItarations = 4;
 
-            var loadedData = new TestData();
-            var clonedData = new TestData();
+            var loadedData = new TestModel();
+            var clonedData = new TestModel();
 
             var service = new TestService();
 
