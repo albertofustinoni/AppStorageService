@@ -54,7 +54,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AppStorageServiceTestBase.cs" />
-    <Compile Include="CachedAppStorageServiceBaseTest.cs" />
+    <Compile Include="AppStorageServiceCachedBaseTest.cs" />
     <Compile Include="Mocks\AppStorageServiceMock.cs" />
     <Compile Include="Models\TestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

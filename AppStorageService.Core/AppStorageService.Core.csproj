@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStorageServiceBase.cs" />
-    <Compile Include="CachedAppStorageServiceBase.cs" />
+    <Compile Include="AppStorageServiceCachedBase.cs" />
     <Compile Include="IAppStorageService.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

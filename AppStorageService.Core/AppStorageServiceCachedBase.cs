@@ -2,7 +2,7 @@
 
 namespace AppStorageService.Core
 {
-    public abstract class CachedAppStorageServiceBase<TService, TData> : IAppStorageService<TData> where TService : IAppStorageService<TData> where TData : class
+    public abstract class AppStorageServiceCachedBase<TService, TData> : IAppStorageService<TData> where TService : IAppStorageService<TData> where TData : class
     {
         protected abstract TService CreateBackingServiceInstance(string fileName);
         protected abstract TData CloneData(TData input);
@@ -12,7 +12,7 @@ namespace AppStorageService.Core
 
         public bool OperationInProgress { get { return BackingService.OperationInProgress; } }
 
-        public CachedAppStorageServiceBase(string fileName)
+        public AppStorageServiceCachedBase(string fileName)
         {
             CachedData = null;
             BackingService = CreateBackingServiceInstance(fileName);

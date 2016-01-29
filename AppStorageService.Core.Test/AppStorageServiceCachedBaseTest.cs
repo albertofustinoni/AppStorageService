@@ -6,9 +6,9 @@ using Xunit;
 
 namespace AppStorageService.Core.Test
 {
-    public class CachedAppStorageServiceBaseTest
+    public class AppStorageServiceCachedBaseTest
     {
-        class TestService : CachedAppStorageServiceBase<AppStorageServiceMock, TestData>
+        class TestService : AppStorageServiceCachedBase<AppStorageServiceMock, TestData>
         {
             public event Func<TestData, TestData> CloneDataHandler;
             public AppStorageServiceMock BackingStore { get; private set; }
