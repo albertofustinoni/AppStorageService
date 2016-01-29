@@ -31,6 +31,11 @@ namespace AppStorageService.Core
                 CachedData = await BackingService.LoadDataAsync();
             }
 
+            if(CachedData == null)
+            {
+                return null;
+            }
+
             var output = CloneData(CachedData);
             return output;
         }
