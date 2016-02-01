@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace AppStorageService.Core
 {
     public abstract class AppStorageServiceBase<TData> : IAppStorageService<TData> where TData : class
     {
-        protected abstract Task SaveDataAsyncLogic(string serializedData);
-        protected abstract Task<string> LoadDataAsyncLogic();
+        protected abstract Task SaveDataAsyncLogic(TData data);
+        protected abstract Task<TData> LoadDataAsyncLogic();
         protected abstract Task DeleteDataAsyncLogic();
 
         public readonly string FileName;
@@ -21,21 +21,14 @@ namespace AppStorageService.Core
         public async Task SaveDataAsync(TData data)
         {
             OperationInProgress = true;
-            var serializedData = await Task.Run(() => JsonConvert.SerializeObject(data));
-            await SaveDataAsyncLogic(serializedData);
+            await SaveDataAsyncLogic(data);
             OperationInProgress = false;
         }
 
         public async Task<TData> LoadDataAsync()
         {
             OperationInProgress = true;
-            var serializedData = await LoadDataAsyncLogic();
-            if (string.IsNullOrEmpty(serializedData))
-            {
-                return null;
-            }
-
-            var output = await Task.Run(() => JsonConvert.DeserializeObject<TData>(serializedData));
+            var output = await LoadDataAsyncLogic();
             OperationInProgress = false;
             return output;
         }
