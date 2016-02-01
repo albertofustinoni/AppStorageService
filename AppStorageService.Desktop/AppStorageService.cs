@@ -1,6 +1,7 @@
 ﻿using AppStorageService.Core;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 
 namespace AppStorageService.Desktop
@@ -9,33 +10,49 @@ namespace AppStorageService.Desktop
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
-        protected override async Task<string> LoadDataAsyncLogic()
+        protected override async Task<TData> LoadDataAsyncLogic()
         {
-            string output = null;
-            try
+            var task = Task.Run<TData>(() =>
             {
-                using (var store = GetStore())
-                using (var stream = store.OpenFile(FileName, FileMode.Open))
-                using (var reader = new StreamReader(stream))
+                TData output;
+                try
                 {
-                    output = await reader.ReadToEndAsync();
+                    using (var store = GetStore())
+                    {
+                        using (var stream = store.OpenFile(FileName, FileMode.Open))
+                        {
+                            var serializer = new DataContractJsonSerializer(typeof(TData));
+                            output = (TData)serializer.ReadObject(stream);
+                        }
+                    }
                 }
-            }
-            catch (FileNotFoundException)
-            {
+                catch (FileNotFoundException)
+                {
+                    return null;
+                }
+                return output;
+            });
 
-            }
-            return output;
+            var result = await task;
+
+            return result;
         }
 
-        protected override async Task SaveDataAsyncLogic(string serializedData)
+        protected override async Task SaveDataAsyncLogic(TData data)
         {
-            using (var store = GetStore())
-            using (var stream = store.OpenFile(FileName, FileMode.Create))
-            using (var writer = new StreamWriter(stream))
+            var task = Task.Run(() =>
             {
-                await writer.WriteAsync(serializedData);
-            }
+                using (var store = GetStore())
+                {
+                    using (var stream = store.OpenFile(FileName, FileMode.Create))
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(TData));
+                        serializer.WriteObject(stream, data);
+                    }
+                }
+            });
+
+            await task;
         }
 
         protected override async Task DeleteDataAsyncLogic()
