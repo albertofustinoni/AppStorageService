@@ -6,13 +6,13 @@ using Xunit;
 namespace AppStorageService.Core.Test
 {
     [Collection("Collection1")]
-    public abstract class AppStorageServiceTestBase<TService> where TService: IAppStorageService<TestModel>
+    public abstract class AppStorageServiceTestBase<TService, TData> where TService: IAppStorageService<TData> where TData : class
     {
         private const string StorageFileName = "FileName.dat";
 
-        private static readonly TestModel SampleData = TestModel.Generate();
-
         protected abstract TService GetServiceInstance(string storageFileName);
+        protected abstract TData GenerateTestData();
+        protected abstract bool CompareEquality(TData reference, TData value);
 
         [Fact]
         public async Task LoadFromStorageAsync_Returns_Null_If_No_Data_Is_Present()
@@ -29,12 +29,13 @@ namespace AppStorageService.Core.Test
         [Fact]
         public async Task LoadFromStorageAsync_Returns_Data_As_Saved()
         {
+            var testData = GenerateTestData();
             var service = GetServiceInstance(StorageFileName);
 
-            await service.SaveDataAsync(SampleData);
+            await service.SaveDataAsync(testData);
 
             var data = await service.LoadDataAsync();
-            Assert.Equal(SampleData, data);
+            Assert.True(CompareEquality(testData, data));
 
             await CleanUp();
         }
@@ -42,9 +43,10 @@ namespace AppStorageService.Core.Test
         [Fact]
         public async Task DeleteDataAsync_Deletes_Data()
         {
+            var testData = GenerateTestData();
             var service = GetServiceInstance(StorageFileName);
 
-            await service.SaveDataAsync(SampleData);
+            await service.SaveDataAsync(testData);
             var data = await service.LoadDataAsync();
             Assert.NotNull(data);
 
@@ -66,25 +68,12 @@ namespace AppStorageService.Core.Test
         }
 
         [Fact]
-        public async Task Shorter_Data_Truncates_Existing_File()
-        {
-            /*var testData = "TestString";
-            var testDataLong = testData + testData;
-
-            var testService = GetServiceInstance<string>(StorageFileName);
-            await testService.SaveDataAsync(testDataLong);
-
-            await testService.SaveDataAsync(testData);
-            var data = await testService.LoadDataAsync();
-            Assert.Equal(testData, data);*/
-        }
-
-        [Fact]
         public async Task OperationInProgress_Works()
         {
-            var operationsToTest = new Func<IAppStorageService<TestModel>, Task>[]
+            var testData = GenerateTestData();
+            var operationsToTest = new Func<IAppStorageService<TData>, Task>[]
             {
-                d => d.SaveDataAsync(SampleData),
+                d => d.SaveDataAsync(testData),
                 d => d.LoadDataAsync(),
                 d => d.DeleteDataAsync()
             };

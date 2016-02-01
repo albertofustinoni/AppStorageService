@@ -1,7 +1,6 @@
 ﻿using AppStorageService.Core;
 using System.IO;
 using System.IO.IsolatedStorage;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 
 namespace AppStorageService.Desktop
@@ -10,49 +9,33 @@ namespace AppStorageService.Desktop
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
-        protected override async Task<TData> LoadDataAsyncLogic()
+        protected override async Task<string> LoadDataAsyncLogic()
         {
-            var task = Task.Run<TData>(() =>
-            {
-                TData output;
-                try
-                {
-                    using (var store = GetStore())
-                    {
-                        using (var stream = store.OpenFile(FileName, FileMode.Open))
-                        {
-                            var serializer = new DataContractJsonSerializer(typeof(TData));
-                            output = (TData)serializer.ReadObject(stream);
-                        }
-                    }
-                }
-                catch (FileNotFoundException)
-                {
-                    return null;
-                }
-                return output;
-            });
-
-            var result = await task;
-
-            return result;
-        }
-
-        protected override async Task SaveDataAsyncLogic(TData data)
-        {
-            var task = Task.Run(() =>
+            string output = null;
+            try
             {
                 using (var store = GetStore())
+                using (var stream = store.OpenFile(FileName, FileMode.Open))
+                using (var reader = new StreamReader(stream))
                 {
-                    using (var stream = store.OpenFile(FileName, FileMode.Create))
-                    {
-                        var serializer = new DataContractJsonSerializer(typeof(TData));
-                        serializer.WriteObject(stream, data);
-                    }
+                    output = await reader.ReadToEndAsync();
                 }
-            });
+            }
+            catch (FileNotFoundException)
+            {
 
-            await task;
+            }
+            return output;
+        }
+
+        protected override async Task SaveDataAsyncLogic(string serializedData)
+        {
+            using (var store = GetStore())
+            using (var stream = store.OpenFile(FileName, FileMode.Create))
+            using (var writer = new StreamWriter(stream))
+            {
+                await writer.WriteAsync(serializedData);
+            }
         }
 
         protected override async Task DeleteDataAsyncLogic()

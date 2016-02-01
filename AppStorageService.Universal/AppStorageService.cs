@@ -1,7 +1,6 @@
 ﻿using AppStorageService.Core;
 using System;
 using System.IO;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography.DataProtection;
 using Windows.Storage;
@@ -13,14 +12,15 @@ namespace AppStorageService.Universal
     {
         public AppStorageService(string fileName) : base(fileName) { }
 
-        protected override async Task SaveDataAsyncLogic(TData data)
+        protected override async Task SaveDataAsyncLogic(string serializedData)
         {
             var folder = GetStorageFolder();
             var file = await folder.CreateFileAsync(FileName, CreationCollisionOption.ReplaceExisting);
             using (var unprotectedStream = new InMemoryRandomAccessStream())
+            using (var writer = new StreamWriter(unprotectedStream.AsStreamForWrite()))
             {
-                var serializer = new DataContractJsonSerializer(data.GetType());
-                serializer.WriteObject(unprotectedStream.AsStreamForWrite(), data);
+                await writer.WriteAsync(serializedData);
+                await writer.FlushAsync();
                 unprotectedStream.Seek(0);
 
                 using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
@@ -32,8 +32,9 @@ namespace AppStorageService.Universal
             }
         }
 
-        protected override async Task<TData> LoadDataAsyncLogic()
+        protected override async Task<string> LoadDataAsyncLogic()
         {
+            string output = null;
             var folder = GetStorageFolder();
             StorageFile file;
             try
@@ -42,10 +43,8 @@ namespace AppStorageService.Universal
             }
             catch (FileNotFoundException)
             {
-                return default(TData);
+                return output;
             }
-
-            TData output;
 
             using (var unprotectedStream = new InMemoryRandomAccessStream())
             {
@@ -56,8 +55,10 @@ namespace AppStorageService.Universal
                 }
 
                 unprotectedStream.Seek(0);
-                var serializer = new DataContractJsonSerializer(typeof(TData));
-                output = (TData)serializer.ReadObject(unprotectedStream.AsStreamForRead());
+                using (var reader = new StreamReader(unprotectedStream.AsStreamForRead()))
+                {
+                    output = await reader.ReadToEndAsync();
+                }
             }
 
             return output;
