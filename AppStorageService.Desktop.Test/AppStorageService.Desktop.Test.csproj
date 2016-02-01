@@ -68,9 +68,15 @@
     <Compile Include="..\AppStorageService.Core\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AppStorageServiceCachedTest.cs" />
-    <Compile Include="AppStorageServiceTestEnum.cs" />
-    <Compile Include="AppStorageServiceTest.cs" />
+    <Compile Include="..\AppStorageService.Universal.Test\AppStorageServiceCachedTest.cs">
+      <Link>AppStorageServiceCachedTest.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStorageService.Universal.Test\AppStorageServiceTest.cs">
+      <Link>AppStorageServiceTest.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStorageService.Universal.Test\AppStorageServiceTestEnum.cs">
+      <Link>AppStorageServiceTestEnum.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,11 @@ using AppStorageService.Core.Test.Models;
 using System.Collections.Generic;
 using System.Linq;
 
+#if WINDOWS_UWP
 namespace AppStorageService.Universal.Test
+#else
+namespace AppStorageService.Desktop.Test
+#endif
 {
     public class AppStorageServiceTestEnum : AppStorageServiceTestBase<AppStorageService<IEnumerable<TestModel>>, IEnumerable<TestModel>>
     {
