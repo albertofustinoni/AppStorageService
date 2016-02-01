@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 
 namespace AppStorageService.Core.Test.Models
 {
-    [DataContract]
     public class TestModel
     {
         private static int Ctr = 0;
 
-        [DataMember]
         public int IntProperty { get; set; }
-        [DataMember]
         public string StringProperty { get; set; }
 
         public bool Equals(TestModel other)
