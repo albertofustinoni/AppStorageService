@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStorageService.Universal.Native.Test", "AppStorageService.Universal.Native.Test\AppStorageService.Universal.Native.Test.csproj", "{FB1952AC-3064-488D-A199-88795AEF0F72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,26 @@ Global
 		{F671D5A2-AB18-4E1E-97E7-C0A12FCD6960}.Release|x64.Build.0 = Release|Any CPU
 		{F671D5A2-AB18-4E1E-97E7-C0A12FCD6960}.Release|x86.ActiveCfg = Release|Any CPU
 		{F671D5A2-AB18-4E1E-97E7-C0A12FCD6960}.Release|x86.Build.0 = Release|Any CPU
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|ARM.ActiveCfg = Debug|ARM
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|ARM.Build.0 = Debug|ARM
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|ARM.Deploy.0 = Debug|ARM
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|x64.ActiveCfg = Debug|x64
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|x64.Build.0 = Debug|x64
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|x64.Deploy.0 = Debug|x64
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|x86.ActiveCfg = Debug|x86
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|x86.Build.0 = Debug|x86
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Debug|x86.Deploy.0 = Debug|x86
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|Any CPU.ActiveCfg = Release|x86
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|ARM.ActiveCfg = Release|ARM
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|ARM.Build.0 = Release|ARM
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|ARM.Deploy.0 = Release|ARM
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|x64.ActiveCfg = Release|x64
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|x64.Build.0 = Release|x64
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|x64.Deploy.0 = Release|x64
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|x86.ActiveCfg = Release|x86
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|x86.Build.0 = Release|x86
+		{FB1952AC-3064-488D-A199-88795AEF0F72}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
