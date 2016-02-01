@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace AppStorageService.Universal.Native.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class NativeSerializationTest
     {
         [TestMethod]
         public async Task TestSimpleInstance()
