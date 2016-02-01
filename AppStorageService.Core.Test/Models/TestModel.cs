@@ -1,40 +1,46 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace AppStorageService.Core.Test.Models
 {
     [DataContract]
     public class TestModel
     {
+        private static int Ctr = 0;
+
         [DataMember]
         public int IntProperty { get; set; }
         [DataMember]
         public string StringProperty { get; set; }
 
-        public override bool Equals(object obj)
+        public bool Equals(TestModel other)
         {
-            var objAsCurrent = obj as TestModel;
-            if (objAsCurrent == null) return false;
-
-            if (IntProperty != objAsCurrent.IntProperty) return false;
-            if (StringProperty != objAsCurrent.StringProperty) return false;
+            if (IntProperty != other.IntProperty) return false;
+            if (StringProperty != other.StringProperty) return false;
 
             return true;
         }
 
-        public override int GetHashCode()
+        public static bool EnumEquals(IEnumerable<TestModel> reference, IEnumerable<TestModel> value)
         {
-            var output = 13;
-            output = 7 * output + IntProperty.GetHashCode();
-            output = 7 * output + StringProperty.GetHashCode();
-            return output;
+            if (reference.Count() != value.Count()) return false;
+
+            foreach (var i in reference.Zip(value, (d, e) => new { refEl = d, valEl = e }))
+            {
+                if (!i.refEl.Equals(i.valEl)) return false;
+            }
+
+            return true;
         }
 
         public static TestModel Generate()
         {
+            Ctr++;
             return new TestModel
             {
-                IntProperty = 4,
-                StringProperty = "TestProp"
+                IntProperty = Ctr,
+                StringProperty = string.Format("TestProp {0}", Ctr)
             };
         }
     }
