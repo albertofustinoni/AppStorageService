@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AppStorageService.Core\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AppStorageService.cs" />
     <Compile Include="AppStorageServiceCached.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

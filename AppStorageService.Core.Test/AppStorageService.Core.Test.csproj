@@ -50,6 +50,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AppStorageService.Core\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AppStorageServiceTestBase.cs" />
     <Compile Include="AppStorageServiceCachedBaseTest.cs" />
     <Compile Include="Mocks\AppStorageServiceMock.cs" />
