@@ -48,7 +48,6 @@
     <Compile Include="AppStorageServiceBase.cs" />
     <Compile Include="AppStorageServiceCachedBase.cs" />
     <Compile Include="IAppStorageService.cs" />
-    <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
