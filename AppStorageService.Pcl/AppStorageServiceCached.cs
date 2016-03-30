@@ -1,6 +1,6 @@
 ﻿using AppStorageService.Core;
 
-namespace AppStorageService.Xamarin
+namespace AppStorageService.Pcl
 {
     public abstract class AppStorageServiceCached<TData> : AppStorageServiceCachedBase<AppStorageService<TData>, TData> where TData : class
     {

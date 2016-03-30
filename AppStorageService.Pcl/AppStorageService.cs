@@ -3,7 +3,7 @@ using PCLStorage;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 
-namespace AppStorageService.Xamarin
+namespace AppStorageService.Pcl
 {
     public class AppStorageService<TData> : AppStorageServiceBase<TData> where TData : class
     {
