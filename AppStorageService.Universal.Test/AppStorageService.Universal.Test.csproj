@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppStorageService.Core.Test\AppStorageService.Core.Test.csproj">
-      <Project>{6e18a30f-3707-4204-8f45-8633737df0c1}</Project>
+      <Project>{3fbddfed-313d-4a84-abdf-81af37d96eb4}</Project>
       <Name>AppStorageService.Core.Test</Name>
     </ProjectReference>
     <ProjectReference Include="..\AppStorageService.Core\AppStorageService.Core.csproj">
