@@ -26,6 +26,8 @@ namespace AppStorageService.Pcl.Test.Android
 		
 		public static void UpdateIdValues()
 		{
+			global::PCLStorage.Resource.String.ApplicationName = global::AppStorageService.Pcl.Test.Android.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::AppStorageService.Pcl.Test.Android.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::AppStorageService.Pcl.Test.Android.Resource.Attribute.actionBarSize;
 		}
 		
