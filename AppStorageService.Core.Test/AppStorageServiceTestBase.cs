@@ -66,20 +66,6 @@ namespace AppStorageService.Core.Test
         }
 
         [Fact]
-        public async Task Shorter_Data_Truncates_Existing_File()
-        {
-            /*var testData = "TestString";
-            var testDataLong = testData + testData;
-
-            var testService = GetServiceInstance<string>(StorageFileName);
-            await testService.SaveDataAsync(testDataLong);
-
-            await testService.SaveDataAsync(testData);
-            var data = await testService.LoadDataAsync();
-            Assert.Equal(testData, data);*/
-        }
-
-        [Fact]
         public async Task OperationInProgress_Works()
         {
             var operationsToTest = new Func<IAppStorageService<TestModel>, Task>[]

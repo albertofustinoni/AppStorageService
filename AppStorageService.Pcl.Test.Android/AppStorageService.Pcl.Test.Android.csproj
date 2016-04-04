@@ -147,9 +147,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MainActivity.cs.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AppStorageService.Core.Test\AppStorageService.Core.Test.csproj">
       <Project>{3fbddfed-313d-4a84-abdf-81af37d96eb4}</Project>
       <Name>AppStorageService.Core.Test</Name>
