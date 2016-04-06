@@ -77,6 +77,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\AppStorageService.Core\StrongNameKey.snk">
+      <Link>StrongNameKey.snk</Link>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AppStorageService.Core.Test\AppStorageService.Core.Test.csproj">
       <Project>{3fbddfed-313d-4a84-abdf-81af37d96eb4}</Project>
       <Name>AppStorageService.Core.Test</Name>
@@ -89,12 +95,6 @@
       <Project>{a1986cf2-5389-4da8-baf0-5049170c6cc0}</Project>
       <Name>AppStorageService.Desktop</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\AppStorageService.Core\StrongNameKey.snk">
-      <Link>StrongNameKey.snk</Link>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

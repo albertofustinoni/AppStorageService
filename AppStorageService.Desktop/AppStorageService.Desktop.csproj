@@ -38,7 +38,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,16 +55,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppStorageService.Core\AppStorageService.Core.csproj">
-      <Project>{b8391564-60b0-47e6-a1dc-df7759ca1cd7}</Project>
-      <Name>AppStorageService.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\AppStorageService.Core\StrongNameKey.snk">
       <Link>StrongNameKey.snk</Link>
     </None>
     <None Include="AppStorageService.Desktop.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppStorageService.Core\AppStorageService.Core.csproj">
+      <Project>{b8391564-60b0-47e6-a1dc-df7759ca1cd7}</Project>
+      <Name>AppStorageService.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

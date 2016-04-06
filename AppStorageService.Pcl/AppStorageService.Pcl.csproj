@@ -40,13 +40,6 @@
     <AssemblyOriginatorKeyFile>..\AppStorageService.Core\StrongNameKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\AppStorageService.Core\AppStorageService.Core.csproj">
-      <Project>{b8391564-60b0-47e6-a1dc-df7759ca1cd7}</Project>
-      <Name>AppStorageService.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\AppStorageService.Core\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -70,6 +63,12 @@
     </None>
     <None Include="AppStorageService.Pcl.nuspec" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppStorageService.Core\AppStorageService.Core.csproj">
+      <Project>{b8391564-60b0-47e6-a1dc-df7759ca1cd7}</Project>
+      <Name>AppStorageService.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
