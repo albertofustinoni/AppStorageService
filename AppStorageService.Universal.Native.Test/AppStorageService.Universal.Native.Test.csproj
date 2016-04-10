@@ -128,8 +128,11 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AppStorageService.Core.Test\AppStorageService.Core.Test.csproj">
-      <Project>{6e18a30f-3707-4204-8f45-8633737df0c1}</Project>
+      <Project>{3fbddfed-313d-4a84-abdf-81af37d96eb4}</Project>
       <Name>AppStorageService.Core.Test</Name>
     </ProjectReference>
     <ProjectReference Include="..\AppStorageService.Core\AppStorageService.Core.csproj">
@@ -140,9 +143,6 @@
       <Project>{bdaecb25-eedf-4e5d-86b5-62a6a342afaf}</Project>
       <Name>AppStorageService.Universal</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

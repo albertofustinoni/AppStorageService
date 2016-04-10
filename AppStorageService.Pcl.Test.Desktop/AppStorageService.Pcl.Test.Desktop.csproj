@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F671D5A2-AB18-4E1E-97E7-C0A12FCD6960}</ProjectGuid>
+    <ProjectGuid>{3F68D0D3-1D64-40F4-A6B4-3C95B857A38C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppStorageService.Desktop.Test</RootNamespace>
-    <AssemblyName>AppStorageService.Desktop.Test</AssemblyName>
+    <RootNamespace>AppStorageService.Pcl.Test.Desktop</RootNamespace>
+    <AssemblyName>AppStorageService.Pcl.Test.Desktop</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;PCL_DESKTOP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -28,17 +28,19 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;PCLDESKTOP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\AppStorageService.Core\StrongNameKey.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,9 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AppStorageService.Core\Properties\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\AppStorageService.Universal.Test\AppStorageServiceCachedTest.cs">
       <Link>AppStorageServiceCachedTest.cs</Link>
     </Compile>
@@ -77,9 +76,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\AppStorageService.Core\StrongNameKey.snk">
-      <Link>StrongNameKey.snk</Link>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +87,9 @@
       <Project>{b8391564-60b0-47e6-a1dc-df7759ca1cd7}</Project>
       <Name>AppStorageService.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AppStorageService.Desktop\AppStorageService.Desktop.csproj">
-      <Project>{a1986cf2-5389-4da8-baf0-5049170c6cc0}</Project>
-      <Name>AppStorageService.Desktop</Name>
+    <ProjectReference Include="..\AppStorageService.Pcl\AppStorageService.Pcl.csproj">
+      <Project>{65d554e7-6d5c-413b-abbd-b22f4ea358fb}</Project>
+      <Name>AppStorageService.Pcl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
